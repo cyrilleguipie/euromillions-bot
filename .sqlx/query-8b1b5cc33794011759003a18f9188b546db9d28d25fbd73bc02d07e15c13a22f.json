@@ -1,0 +1,28 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        SELECT unnest(stars) as num, count(*) as freq\n        FROM draws\n        GROUP BY num\n        ORDER BY freq DESC\n        LIMIT $1\n        ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "num",
+        "type_info": "Int4"
+      },
+      {
+        "ordinal": 1,
+        "name": "freq",
+        "type_info": "Int8"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Int8"
+      ]
+    },
+    "nullable": [
+      null,
+      null
+    ]
+  },
+  "hash": "8b1b5cc33794011759003a18f9188b546db9d28d25fbd73bc02d07e15c13a22f"
+}

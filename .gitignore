@@ -1,1 +1,3 @@
 /target
+.env
+# DO NOT ignore .sqlx - it's needed for offline builds!

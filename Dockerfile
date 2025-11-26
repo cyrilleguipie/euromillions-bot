@@ -3,6 +3,7 @@ FROM rust:latest as builder
 WORKDIR /usr/src/app
 COPY . .
 
+ENV SQLX_OFFLINE=true
 RUN cargo install --path .
 
 FROM debian:bookworm-slim
