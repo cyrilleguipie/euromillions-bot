@@ -30,6 +30,26 @@ A Rust-based bot that scrapes Euromillions draw history, calculates statistics, 
 
 ### Local Development
 
+#### With Nix (Recommended)
+
+If you have Nix with flakes enabled:
+
+```bash
+# Enter development shell
+nix develop
+
+# Or with direnv (automatic)
+direnv allow
+```
+
+This provides:
+- Rust toolchain
+- PostgreSQL
+- sqlx-cli
+- All required dependencies
+
+#### Without Nix
+
 1.  **Clone the repository**:
     ```bash
     git clone <repository-url>
