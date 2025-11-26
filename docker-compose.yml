@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: euromillions_bot
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./migrations/20231026000000_init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U user -d euromillions_bot" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  app:
+    image: rust:latest
+    volumes:
+      - .:/usr/src/app
+      - cargo_cache:/usr/local/cargo/registry
+    working_dir: /usr/src/app
+    environment:
+      DATABASE_URL: postgres://user:password@db:5432/euromillions_bot
+      RUST_LOG: info
+    command: >
+      bash -c "
+        echo 'Database should be ready (waited for healthcheck).' &&
+        cargo run"
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  postgres_data:
+  cargo_cache:

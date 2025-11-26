@@ -1,0 +1,14 @@
+CREATE TABLE IF NOT EXISTS draws (
+    id SERIAL PRIMARY KEY,
+    date DATE NOT NULL UNIQUE,
+    numbers INTEGER[] NOT NULL,
+    stars INTEGER[] NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS grids (
+    id SERIAL PRIMARY KEY,
+    draw_date DATE NOT NULL,
+    numbers INTEGER[] NOT NULL,
+    stars INTEGER[] NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
