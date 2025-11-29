@@ -58,6 +58,7 @@ async fn main() -> std::io::Result<()> {
             .route("/history", web::get().to(routes::get_history))
             .route("/generate", web::get().to(routes::generate_grids))
             .route("/grids", web::get().to(routes::list_grids))
+            .route("/", web::get().to(routes::index))
     })
     .bind(("0.0.0.0", 8080))?
     .run()

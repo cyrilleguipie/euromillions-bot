@@ -46,9 +46,6 @@
           buildInputs = with pkgs; [
             openssl
             postgresql
-          ] ++ lib.optionals stdenv.isDarwin [
-            darwin.apple_sdk.frameworks.Security
-            darwin.apple_sdk.frameworks.SystemConfiguration
           ];
 
           nativeBuildInputs = with pkgs; [
@@ -194,7 +191,7 @@
               owner = "rustsec";
               repo = "advisory-db";
               rev = "main";
-              sha256 = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+              sha256 = "sha256-3mpZPp3Px7uIEcFdbwXBv4pl5594F0nMwJv4zhuLxY8=";
             };
           };
         };

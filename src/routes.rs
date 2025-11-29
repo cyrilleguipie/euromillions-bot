@@ -58,3 +58,7 @@ pub async fn list_grids(pool: web::Data<PgPool>) -> impl Responder {
         Err(e) => HttpResponse::InternalServerError().body(format!("Error listing grids: {}", e)),
     }
 }
+
+pub async fn index() -> impl Responder {
+    HttpResponse::Ok().body("Euromillions Bot API is running")
+}
