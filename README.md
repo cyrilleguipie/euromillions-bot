@@ -1,6 +1,6 @@
 # Euromillions Bot
 
-A Rust-based bot that scrapes Euromillions draw history, calculates statistics, and generates lottery grids based on the most frequent numbers.
+A complete Euromillions lottery system with Rust-based API backend that scrapes draw history, calculates statistics, generates optimized grids, and provides native mobile apps (iOS/Android) plus a modern web interface.
 
 ## Features
 
@@ -14,11 +14,19 @@ A Rust-based bot that scrapes Euromillions draw history, calculates statistics, 
 
 ## Tech Stack
 
+**Backend API:**
 -   **Language**: Rust
 -   **Web Framework**: Actix-web
 -   **Database**: PostgreSQL (via SQLx)
 -   **Scheduling**: Tokio Cron Scheduler
 -   **Scraping**: Reqwest + Scraper
+
+**Client Applications:**
+-   **Web**: Svelte 5 + TypeScript + Vite
+-   **iOS**: Swift + SwiftUI
+-   **Android**: Kotlin + Jetpack Compose
+
+See [`/mobile/README.md`](mobile/README.md) and [`/web/README.md`](web/README.md) for client app documentation.
 
 ## Setup
 
@@ -42,11 +50,25 @@ nix develop
 direnv allow
 ```
 
-This provides:
-- Rust toolchain
-- PostgreSQL
-- sqlx-cli
+**What's included:**
+- Rust toolchain (from `rust-toolchain.toml`)
+- Node.js 20 (for web frontend)
+- PostgreSQL + sqlx-cli
+- Cargo tools: watch, expand, audit, edit, outdated, tarpaulin
+- Docker Compose
 - All required dependencies
+
+**Build commands:**
+```bash
+# Build the binary
+nix build
+
+# Build Docker image
+nix build .#docker
+
+# Run directly
+nix run
+```
 
 #### Without Nix
 
@@ -95,8 +117,10 @@ docker-compose up
 
 This will:
 1.  Start a PostgreSQL database.
-2.  Start the application container (which will compile and run the app).
-3.  The app will be available at `http://localhost:8080`.
+2.  Start the backend API container (which will compile and run the app).
+3.  Build and start the web frontend with nginx.
+4.  The API will be available at `http://localhost:8080`.
+5.  The web app will be available at `http://localhost:3000`.
 
 Note: The first run will take some time to compile dependencies. Subsequent runs will be faster due to cached cargo registry.
 
@@ -112,7 +136,12 @@ Note: The first run will take some time to compile dependencies. Subsequent runs
 
 **What gets deployed:**
 - PostgreSQL database (free tier)
-- Web service with Docker (free tier)
+- Backend API web service with Docker (free tier)
+- Frontend static site (free tier)
+
+**URLs after deployment:**
+- API: `https://euromillions-bot.onrender.com`
+- Web: `https://euromillions-web.onrender.com`
 
 See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed instructions.
 

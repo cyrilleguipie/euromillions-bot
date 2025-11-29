@@ -3,6 +3,11 @@ name = "euromillions_bot"
 version = "0.1.0"
 edition = "2021"
 
+[lib]
+name = "euromillions_bot"
+path = "src/lib.rs"
+
+
 [dependencies]
 actix-web = "4"
 serde = { version = "1.0", features = ["derive"] }
@@ -17,3 +22,8 @@ log = "0.4"
 tokio = { version = "1", features = ["full"] }
 scraper = "0.18"
 tokio-cron-scheduler = "0.10"
+
+[dev-dependencies]
+mockito = "1.2"
+actix-rt = "2.9"
+wiremock = "0.6"

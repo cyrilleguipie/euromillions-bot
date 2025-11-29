@@ -98,3 +98,9 @@ pub async fn fetch_history() -> Result<Vec<NewDraw>, Box<dyn Error + Send + Sync
 
     Ok(all_draws)
 }
+
+#[cfg(test)]
+mod tests {
+    include!("fetcher_tests.rs");
+}
+

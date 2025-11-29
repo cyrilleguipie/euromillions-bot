@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [ "main", "master" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "main", "master" ]
+    branches: [ "main" ]
 
 env:
   CARGO_TERM_COLOR: always
@@ -28,4 +28,13 @@ jobs:
       run: cargo build --verbose
 
     - name: Run tests
-      run: cargo test --verbose
+      run: cargo test --verbose -- --test-threads=1
+      env:
+        DATABASE_URL: postgres://postgres:postgres@localhost:5432/test_db
+        RUST_LOG: debug
+
+    - name: Run tests (ignored)
+      run: cargo test --verbose -- --ignored --test-threads=1
+      continue-on-error: true
+      env:
+        DATABASE_URL: postgres://postgres:postgres@localhost:5432/test_db

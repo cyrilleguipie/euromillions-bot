@@ -48,7 +48,7 @@ fn generate_single_grid(date: NaiveDate, number_pool: &[i32], star_pool: &[i32])
     }
 }
 
-fn get_next_draw_date() -> NaiveDate {
+pub fn get_next_draw_date() -> NaiveDate {
     let today = chrono::Local::now().date_naive();
     let mut current = today;
     loop {
@@ -58,4 +58,9 @@ fn get_next_draw_date() -> NaiveDate {
             _ => continue,
         }
     }
+}
+
+#[cfg(test)]
+mod tests {
+    include!("generator_tests.rs");
 }

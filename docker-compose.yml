@@ -37,6 +37,17 @@ services:
       db:
         condition: service_healthy
 
+  web:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+    depends_on:
+      - app
+    environment:
+      - VITE_API_URL=http://localhost:8080
+
 volumes:
   postgres_data:
   cargo_cache:
